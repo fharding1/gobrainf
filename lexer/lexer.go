@@ -27,24 +27,24 @@ func (l *Lexer) NextToken() token.Token {
 	l.eatWhitespace()
 
 	switch l.ch {
-	case '>':
+	case token.GT:
 		tok = newToken(token.GT, l.ch)
-	case '<':
+	case token.LT:
 		tok = newToken(token.LT, l.ch)
-	case '+':
+	case token.ADD:
 		tok = newToken(token.ADD, l.ch)
-	case '-':
+	case token.SUB:
 		tok = newToken(token.SUB, l.ch)
-	case '[':
+	case token.LBRAC:
 		tok = newToken(token.LBRAC, l.ch)
-	case ']':
+	case token.RBRAC:
 		tok = newToken(token.RBRAC, l.ch)
-	case '.':
+	case token.DOT:
 		tok = newToken(token.DOT, l.ch)
-	case ',':
+	case token.COMMA:
 		tok = newToken(token.COMMA, l.ch)
-	case '0':
-		tok = newToken(token.EOF, l.ch)
+	case token.EOF:
+		tok = token.Token{Type: token.EOF, Literal: ""}
 	}
 
 	l.readChar()
