@@ -124,20 +124,10 @@ func (env *Environment) eval() {
 		env.stack[env.dataIndex]--
 
 	case token.LBRAC:
-		if env.stack[env.dataIndex] == 0 {
-			if env.instructionIndex = env.indexOfMatchingRBrac(); env.instructionIndex == -1 {
-				env.error = ErrNoMatchingBrac
-				return
-			}
-		}
+		env.lLoop()
 
 	case token.RBRAC:
-		if env.stack[env.dataIndex] != 0 {
-			if env.instructionIndex = env.indexOfMatchingLBrac(); env.instructionIndex == -1 {
-				env.error = ErrNoMatchingBrac
-				return
-			}
-		}
+		env.rLoop()
 
 	case token.DOT:
 		if env.out == nil {
@@ -166,4 +156,22 @@ func (env *Environment) eval() {
 	}
 
 	env.instructionIndex++
+}
+
+func (env *Environment) lLoop() {
+	if env.stack[env.dataIndex] == 0 {
+		if env.instructionIndex = env.indexOfMatchingRBrac(); env.instructionIndex == -1 {
+			env.error = ErrNoMatchingBrac
+			return
+		}
+	}
+}
+
+func (env *Environment) rLoop() {
+	if env.stack[env.dataIndex] != 0 {
+		if env.instructionIndex = env.indexOfMatchingLBrac(); env.instructionIndex == -1 {
+			env.error = ErrNoMatchingBrac
+			return
+		}
+	}
 }
