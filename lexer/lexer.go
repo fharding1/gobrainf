@@ -2,6 +2,7 @@ package lexer
 
 import "gitlab.com/fharding/brainf/token"
 
+// Lexer stores info for lexing input
 type Lexer struct {
 	input        string
 	ch           byte
