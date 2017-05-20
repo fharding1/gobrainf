@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/gitlab.com/fharding/gobrainf)](https://goreportcard.com/report/gitlab.com/fharding/gobrainf)
+
 # brainf is a library for brainf**k lexing and evaluating.
 ## usage:
 ```go
