@@ -52,8 +52,17 @@ func (l *Lexer) NextToken() token.Token {
 	return tok
 }
 
+func contains(arr []byte, b byte) bool {
+	for _, v := range arr {
+		if b == v {
+			return true
+		}
+	}
+	return false
+}
+
 func (l *Lexer) eatWhitespace() {
-	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
+	for !contains(append([]byte("<>[].,+-"), 0), l.ch) {
 		l.readChar()
 	}
 }

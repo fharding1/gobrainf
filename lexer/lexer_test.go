@@ -9,7 +9,7 @@ import (
 )
 
 func TestLex(t *testing.T) {
-	input := "<   >[  ]+ \n-"
+	input := "< this test should be considered whitespace  >[  ]+ \n-"
 	res := []token.Token{
 		{token.LT, "<"},
 		{token.GT, ">"},
