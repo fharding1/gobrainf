@@ -24,6 +24,9 @@ func TestEval(t *testing.T) {
 		{"-+<-+>+<>+", ErrDataPtrOutOfRange},
 		{",", ErrNoReadFromNil},
 		{".", ErrNoWriteToNil},
+		{"[", ErrNoMatchingBrac},
+		{"++>++->+<]", ErrNoMatchingBrac},
+		{"++>++[->+<", ErrNoMatchingBrac},
 	}
 
 	for _, v := range cases {

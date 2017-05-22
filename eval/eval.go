@@ -50,11 +50,8 @@ func New(l *lexer.Lexer, in io.Reader, out io.Writer) *Environment {
 
 // Eval evaluates the program and returns the Stack as well as any error
 func (env *Environment) Eval() (Stack, error) {
-	for env.instructionIndex != -1 {
+	for env.instructionIndex != -1 && env.error == nil {
 		env.eval()
-		if env.error != nil {
-			return Stack{}, env.error
-		}
 	}
 	return env.stack, env.error
 }
@@ -158,19 +155,19 @@ func (env *Environment) eval() {
 }
 
 func (env *Environment) lLoop() {
-	if env.stack[env.dataIndex] == 0 {
-		if env.instructionIndex = env.indexOfMatchingRBrac(); env.instructionIndex == -1 {
-			env.error = ErrNoMatchingBrac
-			return
-		}
+	rbrac := env.indexOfMatchingRBrac()
+	if rbrac == -1 {
+		env.error = ErrNoMatchingBrac
+	} else if env.stack[env.dataIndex] == 0 {
+		env.instructionIndex = rbrac
 	}
 }
 
 func (env *Environment) rLoop() {
-	if env.stack[env.dataIndex] != 0 {
-		if env.instructionIndex = env.indexOfMatchingLBrac(); env.instructionIndex == -1 {
-			env.error = ErrNoMatchingBrac
-			return
-		}
+	lbrac := env.indexOfMatchingLBrac()
+	if lbrac == -1 {
+		env.error = ErrNoMatchingBrac
+	} else if env.stack[env.dataIndex] != 0 {
+		env.instructionIndex = lbrac
 	}
 }
