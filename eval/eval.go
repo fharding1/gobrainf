@@ -3,7 +3,6 @@ package eval
 import (
 	"fmt"
 	"io"
-	"strconv"
 
 	"gitlab.com/fharding/brainf/lexer"
 	"gitlab.com/fharding/brainf/token"
@@ -134,7 +133,7 @@ func (env *Environment) eval() {
 			env.error = ErrNoWriteToNil
 			return
 		}
-		env.out.Write([]byte(strconv.Itoa(env.stack[env.dataIndex])))
+		env.out.Write([]byte{byte(env.stack[env.dataIndex])})
 
 	case token.COMMA:
 		if env.in == nil {
