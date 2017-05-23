@@ -8,4 +8,5 @@ build-market:
                 - mkdir -p $GOPATH/src/gitlab.com/fharding/brainf
                 - cp -r . $GOPATH/src/gitlab.com/fharding/brainf/
                 - cd $GOPATH/src/gitlab.com/fharding/brainf
+                - go get github.com/stretchr/testify/assert
                 - go test ./...
