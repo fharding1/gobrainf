@@ -66,30 +66,30 @@ func outOfBounds(arrLen, index int) bool {
 }
 
 func (env *Environment) indexOfMatchingRBrac() int {
-	n := 0
+	depth := 0
 	for ind := env.instructionIndex + 1; ind < len(env.instructions); ind++ {
 		tok := env.instructions[ind]
-		if tok.Type == token.RBRAC && n == 0 {
+		if tok.Type == token.RBRAC && depth == 0 {
 			return ind
 		} else if tok.Type == token.LBRAC {
-			n++
+			depth++
 		} else if tok.Type == token.RBRAC {
-			n--
+			depth--
 		}
 	}
 	return -1
 }
 
 func (env *Environment) indexOfMatchingLBrac() int {
-	n := 0
+	depth := 0
 	for ind := env.instructionIndex - 1; ind >= 0; ind-- {
 		tok := env.instructions[ind]
-		if tok.Type == token.LBRAC && n == 0 {
+		if tok.Type == token.LBRAC && depth == 0 {
 			return ind
 		} else if tok.Type == token.RBRAC {
-			n++
+			depth++
 		} else if tok.Type == token.LBRAC {
-			n--
+			depth--
 		}
 	}
 	return -1
