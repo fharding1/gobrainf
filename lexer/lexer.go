@@ -27,9 +27,9 @@ func (l *Lexer) NextToken() token.Token {
 	l.eatWhitespace()
 
 	if l.ch == token.EOF {
-		tok = token.Token{Type: token.EOF, Literal: ""}
+		tok = token.Token{Type: token.EOF}
 	} else {
-		tok = newToken(token.TokenType(l.ch), l.ch)
+		tok = token.Token{Type: token.TokenType(l.ch)}
 	}
 
 	l.readChar()
@@ -50,10 +50,6 @@ func (l *Lexer) eatWhitespace() {
 	for !contains(append([]byte("<>[].,+-"), 0), l.ch) {
 		l.readChar()
 	}
-}
-
-func newToken(t token.TokenType, ch byte) token.Token {
-	return token.Token{Type: t, Literal: string(ch)}
 }
 
 // New creates a new lexer from an input
