@@ -5,8 +5,7 @@ type TokenType int
 
 // Token a token type and literal value
 type Token struct {
-	Type    TokenType
-	Literal string
+	Type TokenType
 }
 
 const (

@@ -11,13 +11,13 @@ import (
 func TestLex(t *testing.T) {
 	input := "< this test should be considered whitespace  >[  ]+ \n-"
 	res := []token.Token{
-		{token.LT, "<"},
-		{token.GT, ">"},
-		{token.LBRAC, "["},
-		{token.RBRAC, "]"},
-		{token.ADD, "+"},
-		{token.SUB, "-"},
-		{token.EOF, ""},
+		{token.LT},
+		{token.GT},
+		{token.LBRAC},
+		{token.RBRAC},
+		{token.ADD},
+		{token.SUB},
+		{token.EOF},
 	}
 
 	l := New(input)
@@ -25,6 +25,5 @@ func TestLex(t *testing.T) {
 	for _, v := range res {
 		tok := l.NextToken()
 		assert.Equal(t, v.Type, tok.Type)
-		assert.Equal(t, v.Literal, tok.Literal)
 	}
 }
